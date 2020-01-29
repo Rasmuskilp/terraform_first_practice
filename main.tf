@@ -9,7 +9,7 @@ resource "aws_vpc" "app_vpc" {
   Name = var.Name
   }
 }
-#create a subnet
+#create a subnet for app
 resource "aws_subnet" "app_subnet" {
   vpc_id = "${aws_vpc.app_vpc.id}"
   cidr_block = "10.0.0.0/24"
@@ -29,6 +29,12 @@ resource "aws_security_group" "app_sg_80" {
   ingress {
   from_port = 80
   to_port = 80
+  protocol = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+  from_port = 3000
+  to_port = 3000
   protocol = "tcp"
   cidr_blocks = ["0.0.0.0/0"]
   }
@@ -65,7 +71,7 @@ Name = var.Name
 }
 #Launch an instance
 resource "aws_instance" "app_instance" {
-ami          = "ami-067bf2b5ff598f6ba"
+ami          = "ami-0d8e5cfe85e85b81b"
 subnet_id = "${aws_subnet.app_subnet.id}"
 vpc_security_group_ids = ["${aws_security_group.app_sg_80.id}"]
 instance_type = "t2.micro"
