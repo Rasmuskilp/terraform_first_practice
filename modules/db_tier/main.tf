@@ -77,6 +77,6 @@ tags = {
   Name = var.Name
 }
 provisioner "local-exec" {
-    command = "echo ${aws_instance.db_instance.public_ip} > ip_address.txt"
+    command = "echo ${aws_instance.db_instance.*.public_ip} > ip_address.txt"
   }
 }

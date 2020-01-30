@@ -8,3 +8,7 @@ In our stack we have:
 - packer - createsv immutable images of our machines
 - Terraform is the orchestration tool that will setup the infrastructure in the cloud
 #export DB_HOST=mongodb://${pub_ip}:27017/posts
+## In order to get the app running with posts
+## set the ip address in export DB_HOST to the db one
+#do seeds/seed.js
+## then run the app
