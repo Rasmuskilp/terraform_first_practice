@@ -80,4 +80,7 @@ tags = {
 # Send bash script - sh file
 data "template_file" "app_init" {
   template = "${file("./scripts/init_script.sh.tpl")}"
+  vars = {
+  priv_ip =var.priv_ip
+  }
 }

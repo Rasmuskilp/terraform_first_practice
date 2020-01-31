@@ -11,5 +11,11 @@ variable "gateway_id" {
 description = "the gateway id for the app"
 }
 variable "pub_ip" {
-description = "the generated ip"
+description = "the generated public_ip"
+}
+variable "pri_ip" {
+description = " the generated private_ip"
+}
+variable "priv_ip" {
+description = " the generated private_ip"
 }

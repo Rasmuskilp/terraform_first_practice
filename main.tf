@@ -25,8 +25,9 @@ module "app" {
   Name = var.Name
   ami = var.ami
   pub_ip = module.db.pub_ip
+  pri_ip = module.db.pri_ip
+  priv_ip = module.db.priv_ip
 }
-
 module "db" {
   source = "./modules/db_tier"
   vpc_id = aws_vpc.app_vpc.id
@@ -35,4 +36,6 @@ module "db" {
   app_security_group_id = module.app.app_security_group_id
   ami = var.ami2
 }
+
+
 #call module to create db_tier
