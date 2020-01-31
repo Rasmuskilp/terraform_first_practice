@@ -10,28 +10,29 @@ resource "aws_security_group" "sg-db-80" {
   to_port = 27017
   protocol = "tcp"
   #security_groups = []
-  cidr_blocks = ["0.0.0.0/0"]
-  #security_groups = [var.app_security_group_id]
+  #cidr_blocks = ["0.0.0.0/0"]
+  security_groups = [var.app_security_group_id]
   }
   ingress {
   from_port = 22
   to_port = 22
   protocol = "tcp"
-  cidr_blocks = ["0.0.0.0/0"]
-  #security_groups = [var.app_security_group_id]
+  #cidr_blocks = ["0.0.0.0/0"]
+  security_groups = [var.app_security_group_id]
   }
   ingress {
   from_port = 80
   to_port = 80
   protocol = "tcp"
-  cidr_blocks = ["0.0.0.0/0"]
+  security_groups = [var.app_security_group_id]
+  #cidr_blocks = ["0.0.0.0/0"]
   }
   ingress {
   from_port = 3000
   to_port = 3000
   protocol = "tcp"
-  cidr_blocks = ["0.0.0.0/0"]
-  #security_groups = [var.app_security_group_id]
+  #cidr_blocks = ["0.0.0.0/0"]
+  security_groups = [var.app_security_group_id]
   }
   egress {
   from_port = 0
@@ -50,21 +51,21 @@ resource "aws_subnet" "db_subnet" {
   }
 }
 #Route table
-resource "aws_route_table" "db_route" {
-vpc_id = var.vpc_id
-route {
-  cidr_block = "0.0.0.0/0"
-  gateway_id = var.gateway_id
-  }
-  tags = {
-  Name = var.Name
-  }
-}
+#resource "aws_route_table" "db_route" {
+#vpc_id = var.vpc_id
+#route {
+#  cidr_block = "0.0.0.0/0"
+#  gateway_id = var.gateway_id
+#  }
+#  tags = {
+#  Name = var.Name
+#  }
+#}
 # Route table associations
-resource "aws_route_table_association" "db_assoc" {
-subnet_id = aws_subnet.db_subnet.id
-route_table_id = aws_route_table.db_route.id
-}
+#resource "aws_route_table_association" "db_assoc" {
+#subnet_id = aws_subnet.db_subnet.id
+#route_table_id = aws_route_table.db_route.id
+#}
 #Launch an instance
 resource "aws_instance" "db_instance" {
 ami          = var.ami
