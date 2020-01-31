@@ -13,3 +13,4 @@ In our stack we have:
 ## set the ip address in export DB_HOST to the db one
 #do seeds/seed.js
 ## then run the app
+## you can pass on variables to tempplates/scripts by speciyinf vars = {var to be passed on} inside the data attirbute on the main.tf file
